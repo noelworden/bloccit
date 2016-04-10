@@ -11,17 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402014625) do
-=begin
-  create_table "answerssses", force: :cascade do |t|
-    t.integer  "question_id"
+ActiveRecord::Schema.define(version: 20160410004248) do
+
+  create_table "advertisements", force: :cascade do |t|
+    t.string   "title"
     t.text     "body"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "answerssses", ["question_id"], name: "index_answerssses_on_question_id"
-=end
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "post_id"
@@ -36,8 +35,11 @@ ActiveRecord::Schema.define(version: 20160402014625) do
     t.text     "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "topic_id"
   end
-=begin
+
+  add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
+
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -45,5 +47,13 @@ ActiveRecord::Schema.define(version: 20160402014625) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-=end
+
+  create_table "topics", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "publik",      default: true
+    t.text     "description"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
 end
