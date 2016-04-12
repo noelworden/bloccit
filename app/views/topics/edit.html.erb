@@ -1,0 +1,31 @@
+<h1> Edit Topic </h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <p>Guidelines for topics:</p>
+    <ul>
+      <li>Make sure the topic is appropes</li>
+      <li>Never insult dogs</li>
+      <li>Smile when you type</li>
+    </ul>
+  </div>
+</div>
+<div class="col-md-8">
+  <%= form_for @topic do |t| %>
+    <div class="form-group">
+      <%= t.label :name %>
+      <%= t.text_field :name, class: 'form-control', placeholder: "Enter topic name" %>
+    </div>
+    <div class="form-group">
+      <%= t.label :description %>
+      <%= t.text_area :description, rows: 8, class: 'form-control', placeholder: "Enter topic description" %>
+    </div>
+    <div class="form-group">
+      <%= t.label :publik, class: 'checkbox' do %>
+        <%= t.check_box :publik %> Public topic
+        <% end %>
+    </div>
+    <%= t.submit "Save", class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>

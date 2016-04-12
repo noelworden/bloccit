@@ -67,4 +67,49 @@ RSpec.describe TopicsController, type: :controller do
       expect(response).to redirect_to Topic.last
     end
   end
+
+  describe "GET edit" do
+
+    it "returns http success" do
+      get :edit, {id: my_topic.id}
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders the edit view" do
+      get :edit, {id: my_topic.id}
+      expect(response).to render_template :edit
+    end
+
+    it "assigns topic to be updated to @topic" do
+      get :edit, {id: my_topic.id}
+      topic_instance = assigns(:topic)
+
+      expect(topic_instance.id).to eq my_topic.id
+      expect(topic_instance.name).to eq my_topic.name
+      expect(topic_instance.description).to eq my_topic.description
+    end
+  end
+
+  describe "PUT update" do
+
+    it "updates topic with expected attributes" do
+      new_name = RandomData.random_sentence
+      new_description = RandomData.random_paragraph
+
+      put :update, id: my_topic.id, topic: { name: new_name, description: new_description}
+
+      updated_topic = assigns(:topic)
+      expect(updated_topic.id).to eq my_topic.id
+      expect(updated_topic.name).to eq new_name
+      expect(updated_topic.description).to eq new_description
+    end
+
+    it "redirects to the updated topic" do
+      new_name = RandomData.random_sentence
+      new_description = RandomData.random_paragraph
+
+      put :update, id: my_topic.id, topic: { name: new_name, new_description: new_description}
+      expect(response).to redirect_to my_topic
+    end
+  end
 end
