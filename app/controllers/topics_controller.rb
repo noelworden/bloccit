@@ -21,7 +21,7 @@ class TopicsController < ApplicationController
     if @topic.save
       redirect_to @topic, notice: "Topic was saved successfully"
     else
-      flash.new[:alert] = "Error, error, error!"
+      flash.now[:alert] = "Error, error, error!"
       render :new
     end
   end
