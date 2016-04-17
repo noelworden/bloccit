@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = "Save was successfull! Welcome to Bloccit, #{@user.name}."
+      create_session(@user)
       redirect_to root_path
     else
       flash.now[:alert] = "Whoa, that didn't work. Please try again."
