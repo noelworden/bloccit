@@ -1,23 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-
+  let(:my_user) {User.create!(name: "Bloccit User", email: "user@bloccit.io", password: "helloworld")}
   let(:my_topic) {Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)}
-
-  let(:my_post) {my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph)}
-=begin
-  describe "GET #index" do
-    it "returns http success" do
-      get :index
-      expect(response).to have_http_status(:success)
-    end
-
-    it "assigns [my_post] to @posts" do
-      get :index
-      expect(assigns(:posts)).to eq([my_post])
-    end
-  end
-=end
+  let(:my_post) {my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: my_user)}
 
   describe "GET show" do
 
