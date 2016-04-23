@@ -6,9 +6,9 @@ RSpec.describe Post, type: :model do
   let(:title){RandomData.random_sentence}
   let(:body){RandomData.random_paragraph}
 
-  let(:topic){Topic.create!(name: name, description: description)}
+  let(:topic) {Topic.create!(name: name, description: description) }
   let(:user) {User.create!(name: "Bloccit User", email: "user@bloccit.io", password: "helloworld")}
-  let(:post){topic.posts.create!(title: title, body: body, user: user)}
+  let(:post) { topic.posts.create!(title: title, body: body, user: user) }
 
   it {is_expected.to belong_to(:topic)}
   it {is_expected.to belong_to(:user)}
@@ -23,6 +23,8 @@ RSpec.describe Post, type: :model do
   describe "attributes" do
 
     it "has a title, body, and user attribute" do
+      p user
+      p topic
       expect(post).to have_attributes(title: title, body: body, user: user)
     end
   end

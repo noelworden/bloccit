@@ -12,6 +12,19 @@
             <h4 class="media-heading">
               <%= link_to p.title, topic_post_path(@topic, p) %>
           </h4>
+        
+          <small>
+          <% 
+=begin %>
+            submitted <%= time_ago_in_words(@topic.post.created_at) %> ago by <%= post.user.name %> <br>
+         <%= post.comments.count %> Comments
+
+        #### not recognizing post.  why is that? ####
+
+         <% 
+=end %>
+          </small>
+
         </div>
       </div>
     <% end %>
