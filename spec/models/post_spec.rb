@@ -25,6 +25,7 @@ RSpec.describe Post, type: :model do
     it "has a title, body, and user attribute" do
       p user
       p topic
+      p post
       expect(post).to have_attributes(title: title, body: body, user: user)
     end
   end
