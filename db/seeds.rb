@@ -48,6 +48,12 @@ member = User.create!(
   password:'helloworld'
   )
 
+me = User.create!(
+  name: 'Noel',
+  email: 'noelworden@gmail.com',
+  password: 'helloworld'
+  )
+
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
