@@ -5,6 +5,7 @@ RSpec.describe Label, type: :model do
   let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
   let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
   let(:label) {Label.create!(name: 'Label')}
+  let(:label2) {Label.create!(name: 'Label2')}
 
   it {is_expected.to have_many :labelings}
 
@@ -20,6 +21,15 @@ RSpec.describe Label, type: :model do
       post_label = post.labels[0]
 
       expect(topic_label).to eq(post_label)
+    end
+  end
+
+  describe ".update_lables" do
+    it "takes a comma delimited string and returns and array of Labels" do
+      labels = "#{label.name}, #{label2.name}"
+      labels_as_a = [label, label2]
+
+      expect(Label.update_labels(labels)).to eq(labels_as_a)
     end
   end
 end
