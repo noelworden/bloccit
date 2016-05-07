@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506000312) do
+ActiveRecord::Schema.define(version: 20160507160724) do
 
   create_table "commentings", force: :cascade do |t|
     t.integer  "comment_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160506000312) do
     t.datetime "updated_at", null: false
     t.integer  "topic_id"
     t.integer  "user_id"
+    t.float    "rank"
   end
 
   add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
