@@ -11,18 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507174554) do
-
-  create_table "commentings", force: :cascade do |t|
-    t.integer  "comment_id"
-    t.integer  "commentable_id"
-    t.string   "commentable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "commentings", ["comment_id"], name: "index_commentings_on_comment_id"
-  add_index "commentings", ["commentable_type", "commentable_id"], name: "index_commentings_on_commentable_type_and_commentable_id"
+ActiveRecord::Schema.define(version: 20160514130459) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -92,6 +81,7 @@ ActiveRecord::Schema.define(version: 20160507174554) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "role"
+    t.string   "auth_token"
   end
 
   create_table "votes", force: :cascade do |t|
