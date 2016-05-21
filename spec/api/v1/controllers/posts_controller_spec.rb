@@ -7,27 +7,27 @@ require 'rails_helper'
 
   context "unathenticated user" do
     it "GET index returns success" do
-      get :index
+      get :index, topic_id: my_topic.id, id: my_post.id
       expect(response).to have_http_status(:success)
     end
 
     it "GET show returns success" do
-      get :show, id: my_post.id
+      get :show, topic_id: my_topic.id, id: my_post.id
       expect(response).to have_http_status(:success)
     end
 
     it "PUT update returns http unauthenticated" do
-      put :update, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
+      put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
       expect(response).to have_http_status(401)
     end
 
     it "POST create returns http unauthenticated" do
-      put :update, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
+      put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
       expect(response).to have_http_status(401)
     end
 
     it "DELETE destroy returns http unauthenticated" do
-      put :update, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
+      put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
       expect(response).to have_http_status(401)
     end
   end
@@ -38,27 +38,27 @@ require 'rails_helper'
     end
 
     it "GET index returns http success" do
-        get :index
+        get :index, topic_id: my_topic.id, id: my_post.id
       expect(response).to have_http_status(:success)
     end
 
     it "GET show returns success" do
-      get :show, id: my_post.id
+      get :show, topic_id: my_topic.id, id: my_post.id
       expect(response).to have_http_status(:success)
     end
 
     it "PUT update returns http forbidden" do
-      put :update, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
+      put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
       expect(response).to have_http_status(403)
     end
 
     it "PUT create returns http forbidden" do
-      put :update, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
+      put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
       expect(response).to have_http_status(403)
     end
 
     it "DELETE destroy returns http forbidden" do
-      put :update, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
+      put :update, topic_id: my_topic.id, id: my_post.id, post: {title: "Post Title", body: "Body of the post"}
       expect(response).to have_http_status(403)
     end
   end
@@ -71,7 +71,7 @@ require 'rails_helper'
     end
 
     describe "PUT update" do
-      before {put :update, id: my_post.id, post: {title: @new_post.title, body: @new_post.body}}
+      before {put :update, topic_id: my_topic.id, id: my_post.id, post: {title: @new_post.title, body: @new_post.body}}
 
       it "returns http success" do
         expect(response).to have_http_status(:success)
@@ -81,32 +81,32 @@ require 'rails_helper'
         expect(response.content_type).to eq 'application/json'
       end
 
-      it "updates a topic with the correct attributes" do
+      it "updates a post with the correct attributes" do
         updated_post = Post.find(my_post.id)
         expect(response.body).to eq(updated_post.to_json)
       end
     end
 
-    # describe "POST create" do
-    #   before {post :create, post: {title: @new_post.title, body: @new_post.body}}
+    describe "POST create" do
+      before {post :create, topic_id: my_topic, post: {title: "Test", body: "This is the test of the newest post ever ever"}}
 
-    #   it "returns http success" do
-    #     expect(response).to have_http_status(:success)
-    #   end
+      it "returns http success" do
+        expect(response).to have_http_status(:success)
+      end
 
-    #   it "returns json content type" do
-    #     expect(response.content_type).to eq 'application/json'
-    #   end
+      it "returns json content type" do
+        expect(response.content_type).to eq 'application/json'
+      end
 
-    #   it "creates topic with the correct attributes" do
-    #     hashed_json = JSON.parse(response.body)
-    #     expect(hashed_json["title"]).to eq(@new_post.title)
-    #     expect(hashed_json["body"]).to eq(@new_post.body)
-    #   end
-    # end
+      it "creates post with the correct attributes" do
+        hashed_json = JSON.parse(response.body)
+        expect(hashed_json["title"]).to eq("Test")
+        expect(hashed_json["body"]).to eq("This is the test of the newest post ever ever")
+      end
+    end
 
     describe "DELETE destroy" do
-      before {delete :destroy, id: my_post.id}
+      before {delete :destroy, topic_id: my_topic.id, id: my_post.id}
 
       it "returns http success" do
         expect(response).to have_http_status(:success)

@@ -24,6 +24,7 @@ class Api::V1::PostsController < Api::V1::BaseController
   end
 
   def create
+    topic = Topic.find(params[:topic_id])
     post = Post.new(post_params)
 
     if post.valid?
@@ -40,7 +41,7 @@ class Api::V1::PostsController < Api::V1::BaseController
     if post.destroy
       render json: {message: "Post destroyed", status: 200}, status: 200
     else
-      render json: {error: "Post destroy faild", statsu: 400}, status: 400
+      render json: {error: "Post destroy failed", statsu: 400}, status: 400
     end
   end
 
@@ -52,17 +53,17 @@ end
 
 
 ################
-  def create
-    topic = Topic.new(topic_params)
+  # def create
+  #   topic = Topic.new(topic_params)
 
-    if topic.valid?
-      topic.save!
-      render json: topic, status: 201
-    else
-      render json: {error: "Topic is invalid", status: 400}, status: 400
-    end
-  end
+  #   if topic.valid?
+  #     topic.save!
+  #     render json: topic, status: 201
+  #   else
+  #     render json: {error: "Topic is invalid", status: 400}, status: 400
+  #   end
+  # end
 
-  params.require(:topic).permit(:name, :description, :publik)
+  # params.require(:topic).permit(:name, :description, :publik)
 
-  
+  # 
