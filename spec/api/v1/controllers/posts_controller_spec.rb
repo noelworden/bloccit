@@ -88,7 +88,7 @@ require 'rails_helper'
     end
 
     describe "POST create" do
-      before {post :create, topic_id: my_topic, post: {title: "Test", body: "This is the test of the newest post ever ever"}}
+      before {post :create, topic_id: my_topic, post: {title: "Testing", body: "This is the test of the newest post ever ever"}}
 
       it "returns http success" do
         expect(response).to have_http_status(:success)
@@ -100,7 +100,7 @@ require 'rails_helper'
 
       it "creates post with the correct attributes" do
         hashed_json = JSON.parse(response.body)
-        expect(hashed_json["title"]).to eq("Test")
+        expect(hashed_json["title"]).to eq("Testing")
         expect(hashed_json["body"]).to eq("This is the test of the newest post ever ever")
       end
     end
