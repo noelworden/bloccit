@@ -5,12 +5,12 @@
       <div>
         Topic: <%= link_to topic.name, topic %>
       </div>
-      <% end %>
+    <% end %>
 
-      <%@label.posts.each do |post| %>
+    <%@label.posts.each do |post| %>
       <div>
         Post: <%= link_to post.title, topic_post_path(post.topic, post) %>
       </div>
-      <% end %>
+    <% end %>
   </div>
 </div>
