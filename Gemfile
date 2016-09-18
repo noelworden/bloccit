@@ -9,6 +9,7 @@ gem 'bootstrap-sass'
 gem 'bcrypt'
 gem 'rails', '4.2.5'
 gem 'figaro', '1.0'
+gem 'faker'
 
 
 group :production do

@@ -2,7 +2,7 @@ require 'random_data'
 
 5.times do
    User.create!(
-   name:     RandomData.random_name,
+   name:     Faker::Superhero.name,
    email:    RandomData.random_email,
    password: RandomData.random_sentence
    )
@@ -11,8 +11,8 @@ require 'random_data'
 
 15.times do
   Topic.create!(
-    name: RandomData.random_sentence,
-    description: RandomData.random_paragraph
+    name: Faker::Hipster.sentence,
+    description: Faker::Hipster.paragraph(2),
     )
 end
 topics = Topic.all
@@ -21,8 +21,8 @@ topics = Topic.all
   post = Post.create!(
     user: users.sample,
     topic: topics.sample,
-    title: RandomData.random_sentence,
-    body: RandomData.random_paragraph
+    title: Faker::Hipster.sentence,
+    body: Faker::Hipster.paragraph(6)
     )
   post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
   rand(1..5).times {post.votes.create!(value: [-1, 1].sample, user: users.sample)}
@@ -33,14 +33,14 @@ posts = Post.all
   Comment.create!(
     user: users.sample,
     post: posts.sample,
-    body: RandomData.random_paragraph
+    body: Faker::Hipster.paragraph(2)
     )
 end
 
 admin = User.create!(
   name:    'Admin User',
   email:   'admin@example.com',
-  password:'  ',
+  password:'password',
   role:    'admin'
   )
 
